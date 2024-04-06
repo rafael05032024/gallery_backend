@@ -1,6 +1,7 @@
 import { compare } from 'bcrypt';
 import { sign } from 'jsonwebtoken';
 
+import config from '@/config';
 import { UserRepository } from '@/infra';
 import { AppError } from '@/errors';
 
@@ -26,9 +27,9 @@ export class CreateSessionService {
       throw new AppError(400, 'Wrong Password');
     }
 
-    const token = sign({}, 'zv68ai', {
+    const token = sign({}, config.jwt.authKey, {
       subject: String(user.id),
-      expiresIn: '1d'
+      expiresIn: config.jwt.expiresIn
     });
 
     delete user.password;
