@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 
 import { CreateSessionService } from '@/services';
-import { UserRepository } from '@/repositories';
+import { UserRepository } from '@/infra';
 
 export class SessionContoller {
   async create(request: Request, response: Response) {

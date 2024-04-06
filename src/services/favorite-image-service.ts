@@ -1,4 +1,4 @@
-import { GalleryRepository } from '@/repositories';
+import { GalleryRepository } from '@/infra';
 
 export class FavoriteImageService {
   constructor(private galleryRepository: GalleryRepository) {}

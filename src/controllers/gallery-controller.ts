@@ -6,7 +6,7 @@ import {
   DeleteImageFromGalleryService,
   FavoriteImageService
 } from '@/services';
-import { GalleryRepository } from '@/repositories';
+import { GalleryRepository } from '@/infra';
 
 export class GalleryController {
   async create(request: Request, response: Response) {

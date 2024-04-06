@@ -1,6 +1,6 @@
 import { hash } from 'bcrypt';
 
-import { UserRepository } from '@/repositories';
+import { UserRepository } from '@/infra';
 import { AppError } from '@/errors';
 
 export class CreateUserService {

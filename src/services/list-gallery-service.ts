@@ -1,4 +1,4 @@
-import { GalleryRepository } from '@/repositories';
+import { GalleryRepository } from '@/infra';
 import { GalleryModel } from '@/models';
 
 export class ListGalleryService {

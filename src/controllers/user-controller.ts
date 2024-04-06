@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 
 import { CreateUserService } from '@/services';
-import { UserRepository } from '@/repositories';
+import { UserRepository } from '@/infra';
 
 export class UserContoller {
   async create(request: Request, response: Response) {

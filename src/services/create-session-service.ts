@@ -1,7 +1,7 @@
 import { compare } from 'bcrypt';
 import { sign } from 'jsonwebtoken';
 
-import { UserRepository } from '@/repositories';
+import { UserRepository } from '@/infra';
 import { AppError } from '@/errors';
 
 export class CreateSessionService {
