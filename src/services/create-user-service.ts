@@ -9,12 +9,25 @@ export class CreateUserService {
   async execute(
     request: CreateUserService.Request
   ): Promise<CreateUserService.Response> {
-    const { email, name, password } = request;
+    const required = ['name', 'email', 'password', 'passwordConfirmation'];
+    
+    for (const mandatoryField of required) {
+      
+      if (!request[mandatoryField]) {
+        throw new AppError(400, `Field ${mandatoryField} is missing`);
+      }
+    }
+    
+    const { email, name, password, passwordConfirmation } = request;
     const emailAlreadyInUse = 
       await this.userRepository.getByEmail(email);
     
     if (emailAlreadyInUse) {
       throw new AppError(400, 'Email already in use');
+    }
+
+    if (password !== passwordConfirmation) {
+      throw new AppError(400, 'Passwords does not match');
     }
 
     const hashedPassword = await hash(password, 8);
@@ -35,6 +48,7 @@ export namespace CreateUserService {
     name: string;
     email: string;
     password: string;
+    passwordConfirmation: string;
   };
 
   export type Response = {

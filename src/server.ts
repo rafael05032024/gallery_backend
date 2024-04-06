@@ -1,6 +1,7 @@
 import 'express-async-errors';
 
 import express, { NextFunction, Request, Response } from 'express';
+import cors from 'cors';
 import fileupload from 'express-fileupload';
 
 import config from './config';
@@ -13,6 +14,7 @@ const uri = 'mongodb://mongo:27017/';
 MongoDB.connect(uri).then(() => {
   console.log('connected with database!');
 
+  server.use(cors());
   server.use(express.json());
   server.use(fileupload());
 
