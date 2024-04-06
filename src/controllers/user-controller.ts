@@ -12,6 +12,6 @@ export class UserContoller {
     const newUser = 
       await createUserService.execute({ name, email, password });
 
-    response.status(200).json(newUser);    
+    response.status(201).json(newUser);    
   }
 }
