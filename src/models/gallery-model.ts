@@ -1,5 +1,9 @@
 export type GalleryModel  = {
-  id: string;
-  owner: string;
+  id: number;
+  owner: number;
   image: string;
+  like: boolean;
+  love: boolean;
+  created_at: string;
+  updated_at: string;
 };

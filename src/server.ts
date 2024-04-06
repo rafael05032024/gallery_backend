@@ -1,9 +1,15 @@
 import 'express-async-errors';
 
 import express, { NextFunction, Request, Response } from 'express';
+import fileupload from 'express-fileupload';
 
 import { AppError } from '@/errors';
-import { MongoDB, sessionRoutes, userRoutes } from '@/infra';
+import { 
+  MongoDB, 
+  sessionRoutes, 
+  userRoutes, 
+  galleryRoutes 
+} from '@/infra';
 
 const server = express();
 const port = 3200;
@@ -13,6 +19,7 @@ MongoDB.connect(uri).then(() => {
   console.log('connected with database!');
 
   server.use(express.json());
+  server.use(fileupload());
 
   server.get('/status', (req, res) => {
     return res.send({ ok: true });
@@ -20,6 +27,7 @@ MongoDB.connect(uri).then(() => {
 
   server.use('/session', sessionRoutes);
   server.use('/user', userRoutes);
+  server.use('/gallery', galleryRoutes);
 
   server.listen(port, '0.0.0.0', () => {
     console.log(`API up and running on port ${port}`);
