@@ -13,7 +13,7 @@ export class GalleryRepository {
 
     return collection.find(filter, { 
       projection: { _id: 0 } 
-    }).toArray() as any;
+    }).sort({ created_at: -1 }).toArray() as any;
   }
 
   async delete(id: number): Promise<void> {
