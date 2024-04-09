@@ -30,7 +30,10 @@ export class GalleryController {
     const listGalleryService = 
       new ListGalleryService(galleryRepository);
     const gallery = 
-      await listGalleryService.execute({ userId });
+      await listGalleryService.execute({ 
+        userId,
+        ...(request.query || {}) 
+      });
 
     response.status(200).json(gallery);    
   }

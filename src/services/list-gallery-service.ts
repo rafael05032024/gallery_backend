@@ -7,9 +7,25 @@ export class ListGalleryService {
   async execute(
     request: ListGalleryService.Request
   ): Promise<ListGalleryService.Response> {
-    const { userId } = request;
+    const { userId, ...filters } = request;
+
+    for (const key of Object.keys(filters)) {
+      if (filters[key] === 'true' || filters[key] === 'false') {
+        filters[key] = JSON.parse(filters[key]);
+      } else if (!isNaN(filters[key])) {
+        filters[key] = Number(filters[key]);
+      }
+    }
+
+    const query = {
+      ...filters,
+      owner: userId
+    };
+
+    console.log(query);
+
     const gallery = 
-      await this.galleryRepository.listByOwner(userId);
+      await this.galleryRepository.list(query);
 
     return gallery;
   }
@@ -18,6 +34,7 @@ export class ListGalleryService {
 export namespace ListGalleryService {
   export type Request = {
     userId: number;
+    [filter: string]: any;
   };
 
   export type Response = GalleryModel[];

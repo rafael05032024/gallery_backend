@@ -8,12 +8,10 @@ export class GalleryRepository {
     return collection.findOne({ id }) as any;
   }
 
-  async listByOwner(owner: number): Promise<GalleryModel[]> {
+  async list(filter: any): Promise<GalleryModel[]> {
     const collection = MongoDB.getCollection('gallery');
 
-    return collection.find({ 
-      owner 
-    }, { 
+    return collection.find(filter, { 
       projection: { _id: 0 } 
     }).toArray() as any;
   }
